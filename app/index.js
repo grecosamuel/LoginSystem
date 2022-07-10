@@ -8,5 +8,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
+// Express Config
+const app = express();
+const PORT = process.env.PORT || 3000;
 
+
+
+// Start Server
+app.listen( () => {
+    console.log(`Server started on :${PORT}...`);
+});
 
