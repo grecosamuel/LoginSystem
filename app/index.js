@@ -55,6 +55,10 @@ app.post(
     }
    );
 
+app.post("/user/private", passport.authenticate("jwt-middle", {session: false}), (req, res, next) => {
+    res.json({user: req.user});
+});
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server started on :${PORT}...`);
