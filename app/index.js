@@ -6,6 +6,8 @@ const dotenv = require("dotenv");
 const db = require("./db/dbConnection");
 const passportConfig = require("./config/passportConfig");
 const bodyParser = require('body-parser'); // parser middleware
+const jwt = require("jsonwebtoken");
+
 
 // Load .env config
 dotenv.config();
@@ -40,10 +42,16 @@ app.post(
     "/auth/login",
     passport.authenticate('local-signin', { session: false }),
     (req, res, next) => {
-    // login
-    res.json({
-    user: req.user,
-    });
+        // login
+        jwt.sign({user: req.user}, 'secretKey', { expiresIn: '1h'}, (err, token) => {
+            if (err) {
+                return res.json({
+                    message: "Failed to login",
+                    token: null
+                });
+            }
+            res.json({token});
+        });
     }
    );
 
