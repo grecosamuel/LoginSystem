@@ -52,6 +52,7 @@ module.exports = (passport) => {
                 const isMatch = await user.matchPassword(password);
                 if (!isMatch) return done(null, false);
 
+                user.password = undefined;
                 return done(null, user);
 
 
