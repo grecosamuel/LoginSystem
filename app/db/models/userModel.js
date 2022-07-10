@@ -15,8 +15,18 @@ const userSchema = new Schema({
     }
 });
 
+// Match Password
+userSchema.methods.matchPassword = async function(password){
+    try {
+        return await argon.verify(this.password, password);
+    }
+    catch(err) {
+        throw new Error(err);
+    }
+};
+
 // Hash password in pre-save 
-userSchema.pre('save', async(next) => {
+userSchema.pre('save', async function(next) {
     try {
 
         // Check if password is modified
