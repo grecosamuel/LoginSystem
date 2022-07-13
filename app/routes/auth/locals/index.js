@@ -7,7 +7,6 @@ const router = express.Router();
 
 
 router.get("/", (req, res, next) => {
-    console.log(req.cookies)
     res.render("localsForm", {
         pageTitle: "Locals"
     });
@@ -46,7 +45,10 @@ router.post(
                         token: null
                     });
                 }
-                res.cookie("access-token", token);
+                res.cookie("access-token", token, {
+                    maxAge: 1000 * 60 * 15, // would expire after 15 minutes
+                    httpOnly: true
+                });
                 res.json({token});
             } 
         );
