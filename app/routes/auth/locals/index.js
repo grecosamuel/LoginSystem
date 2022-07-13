@@ -42,7 +42,7 @@ router.post(
             (err, token) => {
                 if (err) {
                     return res.json({
-                        message: "Failed to login",
+                        message: "Failed to generate JWT",
                         token: null
                     });
                 }
