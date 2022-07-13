@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+    <%- include("./partials/defaultHeader"); %>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container my-5 py-5">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <h2> Locals Authentication Form </h2>
+                </div>
+            </div>
+
+
+            <div class="row my-5">
+                <div class="col-12">
+                    <form id="localsForm" method="POST">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input type="password" name="password" class="form-control" id="exampleInputPassword1" required="">
+                        </div>
+                        <button type="button" id="signUpButton" onclick="signUp()" class="btn btn-primary">Sign Up</button>
+                        <button type="button" id="signInButton" onclick="signIn()" class="btn btn-primary">Sign In</button>
+                      </form>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+        
+        
+        <script>
+
+            function signUp(){
+                let form = document.getElementById("localsForm");
+                form.action = "/auth/locals/signup";
+                if (form.checkValidity()) {
+                    form.submit();
+                }
+            }
+
+            function signIn(){
+                let form = document.getElementById("localsForm");
+                form.action = "/auth/locals/signin";
+                if (form.checkValidity()) {
+                    form.submit();
+                }
+            }
+
+        </script>
+    </body>
+    <%- include("./partials/bootstrapJS"); %>
+</html>

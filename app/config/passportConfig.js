@@ -49,10 +49,10 @@ module.exports = (passport) => {
                 // Check user exist
                 const user = await userModel.findOne({email: email});
 
-                if (!user) return done(null, false);
+                if (!user) return done(null, false, {nologin: "User not exist!"});
 
                 const isMatch = await user.matchPassword(password);
-                if (!isMatch) return done(null, false);
+                if (!isMatch) return done(null, false, {nologin: "Wrong password!"});
 
                 user.password = undefined;
                 return done(null, user);

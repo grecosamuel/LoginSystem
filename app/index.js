@@ -8,6 +8,8 @@ const passportConfig = require("./config/passportConfig");
 const bodyParser = require('body-parser'); // parser middleware
 const jwt = require("jsonwebtoken");
 const authRoutes = require("./routes/auth");
+const path = require("path");
+const flash = require("connect-flash");
 
 // Load .env config
 dotenv.config();
@@ -20,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.static("public"))
+app.use(flash());
 
 // Mongoose Connection
 db.connect(process.env.MONGODB_URL);
@@ -31,6 +34,11 @@ passportConfig(passport);
 // Routes 
 app.use("/auth", authRoutes);
 
+app.get("/", (req, res, next) => {
+    res.render("home", {
+        pageTitle: "Home"
+    });
+})
 
 app.post("/user/private", passport.authenticate("jwt-middle", {session: false}), (req, res, next) => {
     res.json({user: req.user});
