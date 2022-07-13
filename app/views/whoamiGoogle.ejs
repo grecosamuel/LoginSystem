@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    
+    <%- include("./partials/defaultHeader"); %>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container-fluid my-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Google</li>
+                </ol>
+              </nav>
+
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h4>
+                        Name:
+                    </h4>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <p class="text-muted">
+                        <%= user.displayName %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <h4>
+                        Email:
+                    </h4>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <p class="text-muted">
+                        <%= user.email %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row my-5">
+                <div class="col-12">
+                    <form action="/auth/google/logout" class="w-100" method="POST">
+                        <input class="btn btn-primary w-100" type="submit" value="Log Out">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="" async defer></script>
+    </body>
+    <%- include("./partials/bootstrapJS"); %>
+</html>
