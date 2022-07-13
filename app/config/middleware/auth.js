@@ -18,9 +18,13 @@ async function verifyToken( req, res, next ) {
             return res.status(401).send("Unauthorized").end();
         }
     }
+};
 
-
-}
+async function checkAuthenticated( req, res, next ) {
+    if (req.isAuthenticated()) return next();
+    return res.status(401).send("Unauthorized").end();
+};
 
 
 module.exports.verifyToken = verifyToken;
+module.exports.checkAuthenticated = checkAuthenticated;
