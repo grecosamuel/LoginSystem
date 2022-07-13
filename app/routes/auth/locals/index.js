@@ -51,7 +51,7 @@ router.post(
                     httpOnly: true
                 });
 
-                return res.redirect("/user/private");
+                return res.redirect("/user/private/locals");
             } 
         );
 });
