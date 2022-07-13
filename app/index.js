@@ -43,7 +43,10 @@ app.get("/", (req, res, next) => {
 })
 
 app.get("/user/private", verifyToken, (req, res, next) => {
-    res.json({"Status" : "Accepted"});
+    res.render("whoami", {
+        pageTitle: "Whoami",
+        user: res.locals.user_data.user
+    })
 });
 
 // Start Server
