@@ -11,6 +11,7 @@ async function verifyToken( req, res, next ) {
 
         try {
             let decoded = jwt.verify(token, "secretKey");
+            res.locals.user_data = decoded;
             next();
         }
         catch (err) {
