@@ -50,7 +50,8 @@ router.post(
                     maxAge: 1000 * 60 * 15, // would expire after 15 minutes
                     httpOnly: true
                 });
-                res.json({token});
+
+                return res.redirect("/user/private");
             } 
         );
 });
