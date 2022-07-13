@@ -13,7 +13,9 @@
 
         <div class="container">
             Whoami: <%= user.email %>
-            <a href="/auth/locals/logout">Log out</a>
+           <form action="/auth/locals/logout" method="POST">
+                <input type="submit" value="Log out">
+           </form>
         </div>
         <script src="" async defer></script>
     </body>
