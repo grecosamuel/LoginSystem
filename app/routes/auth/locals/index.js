@@ -2,6 +2,7 @@
 const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const { verifyToken } = require("../../../config/middleware/auth");
 const router = express.Router();
 
 
@@ -53,5 +54,16 @@ router.post(
             } 
         );
 });
+
+
+router.post(
+    "/logout",
+    verifyToken,
+    (req, res, next) => {
+
+        res.clearCookie("access-token");
+        return res.redirect("/auth/locals/");
+    }
+);
 
 module.exports = router;
