@@ -9,7 +9,9 @@ const bodyParser = require('body-parser'); // parser middleware
 const jwt = require("jsonwebtoken");
 const authRoutes = require("./routes/auth");
 const path = require("path");
-const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
+const { verifyToken } = require("./config/middleware/auth");
+
 
 // Load .env config
 dotenv.config();
@@ -22,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.use(express.static("public"))
-app.use(flash());
+app.use(cookieParser());
 
 // Mongoose Connection
 db.connect(process.env.MONGODB_URL);
@@ -40,8 +42,8 @@ app.get("/", (req, res, next) => {
     });
 })
 
-app.post("/user/private", passport.authenticate("jwt-middle", {session: false}), (req, res, next) => {
-    res.json({user: req.user});
+app.get("/user/private", verifyToken, (req, res, next) => {
+    res.json({"Status" : "Accepted"});
 });
 
 // Start Server
