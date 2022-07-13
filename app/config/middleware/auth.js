@@ -10,7 +10,7 @@ async function verifyToken( req, res, next ) {
     else {
 
         try {
-            let decoded = jwt.verify(token, "secretKey");
+            let decoded = jwt.verify(token, process.env.JWT_SECRET);
             res.locals.user_data = decoded;
             next();
         }

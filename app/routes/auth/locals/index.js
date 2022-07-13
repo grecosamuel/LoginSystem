@@ -37,7 +37,7 @@ router.post(
     (req, res, next) => {
         jwt.sign(
             { user: req.user },
-            'secretKey',
+            process.env.JWT_SECRET,
             { expiresIn: '1h' },
             (err, token) => {
                 if (err) {
