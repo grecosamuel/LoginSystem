@@ -1,5 +1,6 @@
 // Required Modules
 const LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const JWTStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt")
 const userModel = require("../db/models/userModel");
@@ -66,4 +67,28 @@ module.exports = (passport) => {
     )
     );
 
+
+
+    // Google Strategy
+    passport.use(
+        "google-signin",
+        new GoogleStrategy({
+            clientID: "268561289617-dspgh8jrdj45caaepv74k72bjgduhlfq.apps.googleusercontent.com",
+            clientSecret: "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",
+            callbackURL: "/auth/google/callback",
+            passReqToCallback: true,
+        },
+        (request, accessToken, refreshToken, profile, done) => {
+            return done(null, profile);
+        })
+    );
+
+
+    // Serialize - Deserialize
+    passport.serializeUser( (user, done) => {
+        done(null, user)
+     });
+    passport.deserializeUser((user, done) => {
+       done (null, user)
+     })
 };
