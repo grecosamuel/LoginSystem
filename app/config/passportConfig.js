@@ -66,23 +66,4 @@ module.exports = (passport) => {
     )
     );
 
-
-    // JWT Strategy 
-    passport.use("jwt-middle",
-        new JWTStrategy({
-            jwtFromRequest: ExtractJwt.fromHeader("authorization"),
-            secretOrKey: 'secretKey',
-        },
-        async (payload, done) => {
-            try {
-                const user = payload.user;
-                done(null, user);
-            }
-            catch (err) {
-                done(err, false);
-            }
-        })
-    )
-
-
 };
